@@ -1,0 +1,71 @@
+Firebase Hosting Cheatsheet
+---------------------------
+by jaegra
+github.io/jaegra
+
+1. Make sure you have Node JS installed. Check Node version:
+    >node -v
+
+2. Make sure you have firebase-tools installed. Check firebase version:
+    >firebase -V 
+
+    **To install firebase-tools: >npm install -g firebase-tools   
+
+3. Log in to Firebase from your Google account. Note: If you're already logged in to a Google account, and it's not the one you want, you'll need to log out:
+    >firebase logout
+
+    >firebase login
+
+    This will take you to a Google log in screen where you can select the Google account you want.
+
+4. Initiate your project. From the directory that includes your project files:
+    >firebase init
+
+    It will ask you a series of questions. Scroll down with your arrow keys. Hit space to select. And then enter.
+
+    Select Y on directory (assuming you're in the current directory).
+    Select hosting.
+    Select Use an existing project.
+    Select the correct project name.
+    Select public directory. Default is public. That should be fine if you don't have a reason to change it.
+    Single-page app. Select N for a normal website.
+
+    You should get a message that the project is initialized. And in your local project directory, you should see some new firebase-related files.
+
+5. In your local project directory, you should see a new folder, called public (assuming you accepted the default filename.)
+    Move all your web files into the public folder. You can delete the default dummy index.html file that's already in the public folder.
+    Note there's also a default 404.html file provided. You may want to edit or replace it to brand it for your site.
+
+    No need to move the firebase-related files (or the .gitignore file).
+
+6. Test your site by previewing your site locally.
+    >firebase serve
+
+7. Deploy your site to Firebase hosting.
+    >firebase deploy
+
+You should see the url for your project in the terminal. You can also find it on your Firebase hosting dashboard.
+
+8. Link your Firebase project to your domain name.
+    From the Firebase dashboard, click on the Add custom domain button.
+    Enter the domain name.
+    Copy the txt record.
+    Go to the DNS for your domain name. 
+    (I use NameSilo, so the directions below are specific to them.)
+    Click on the domain name.
+    Select manage DNS.
+    Select the record type you want to create: TXT/SPF
+    Paste the Firebase txt into the txt area. Change the TTL to 3600 (smallest NameSilo allows) to make the change theoretically happen faster (3600=1hr). Then Submit.
+    Delete all the A records and Cname, etc.
+    Click the Verify button at Firebase until it verifies.
+    Add the A records to your DNS that Firebase provides.
+    Remember to cover both www and no www versions.
+    It may take a few minutes for the DNS to propagate from your domain registrar to Firebase.
+    It also takes a bit longer for the SSL certificate to get attached, so you may see a "site not safe" warning for a few hours while that happens.
+    
+
+
+
+
+
+
